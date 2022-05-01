@@ -11,9 +11,9 @@ export default function MyPortfolio() {
         showsHorizontalScrollIndicator={false}
         style={styles.previewContainer}
       >
-        <PortfolioPreview coinId={"bitcoin"} />
-        <PortfolioPreview coinId={"ripple"} />
-        <PortfolioPreview coinId={"solana"} />
+        <PortfolioPreview coinId="bitcoin" />
+        <PortfolioPreview coinId="ripple" />
+        <PortfolioPreview coinId="solana" />
       </ScrollView>
     </View>
   );

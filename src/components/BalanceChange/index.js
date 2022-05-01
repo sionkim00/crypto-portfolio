@@ -7,7 +7,7 @@ export default function BalanceChange({ changePercentage, balance }) {
     <View style={styles.container}>
       <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
         <Text style={styles.symbolText}>$</Text>
-        <Text style={styles.balanceText}>{balance}</Text>
+        <Text style={styles.balanceText}>{balance.toFixed(2)}</Text>
       </View>
       <View
         style={{

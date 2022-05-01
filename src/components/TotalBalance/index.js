@@ -1,16 +1,30 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import {
+  getTotalBalance,
+  getTotalBalanceDailyChange,
+  portfolioValueState,
+} from "../../atoms/Portfolios";
 import BalanceChange from "../BalanceChange";
 
 export default function TotalBalance() {
-  const [balance, setBalance] = useState(5000.12);
-  const [changePercentage, setChangePercentage] = useState(-2.4);
+  const [balance, setBalance] = useState(0);
+  const portfolioValue = useRecoilValue(portfolioValueState);
+  const totalBalance = useRecoilValue(getTotalBalance);
+  const totalBalanceDailyChange = useRecoilValue(getTotalBalanceDailyChange);
+
+  useEffect(() => {
+    setBalance(totalBalance);
+  }, [portfolioValue]);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Total Balance</Text>
       <View style={styles.balanceContainer}>
-        <BalanceChange changePercentage={changePercentage} balance={9281.13} />
+        <BalanceChange
+          changePercentage={totalBalanceDailyChange}
+          balance={balance}
+        />
       </View>
     </View>
   );

@@ -1,24 +1,41 @@
-import { Image, StyleSheet, View } from "react-native";
-import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { Suspense } from "react";
+import { useNavigation } from "@react-navigation/native";
 import TotalBalance from "../../components/TotalBalance";
 import MyPortfolio from "../../components/MyPortfolio";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../../../assets/elon.jpeg")}
-        style={styles.profileImage}
-      />
-      {/* Total balance */}
-      <View style={styles.totalContainer}>
-        <TotalBalance />
+    <Suspense
+      fallback={
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      }
+    >
+      <View style={styles.container}>
+        <Image
+          source={require("../../../assets/elon.jpeg")}
+          style={styles.profileImage}
+        />
+        {/* Total balance */}
+        <View style={styles.totalContainer}>
+          <TotalBalance />
+        </View>
+        {/* My Portfolio */}
+        <View style={styles.myPortfolioContainer}>
+          <MyPortfolio />
+        </View>
+
+        <TouchableOpacity
+          style={styles.addContainer}
+          onPress={() => navigation.navigate("AddPortfolioScreen")}
+        >
+          <Text style={styles.add}>+</Text>
+        </TouchableOpacity>
       </View>
-      {/* My Portfolio */}
-      <View style={styles.myPortfolioContainer}>
-        <MyPortfolio />
-      </View>
-    </View>
+    </Suspense>
   );
 }
 
@@ -41,5 +58,18 @@ const styles = StyleSheet.create({
   },
   myPortfolioContainer: {
     marginTop: 40,
+  },
+  addContainer: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    backgroundColor: "black",
+    paddingHorizontal: 20,
+    paddingVertical: 7,
+    borderRadius: 40,
+  },
+  add: {
+    color: "white",
+    fontSize: 40,
   },
 });

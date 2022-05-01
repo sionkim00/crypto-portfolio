@@ -6,27 +6,22 @@ import { Ionicons } from "@expo/vector-icons";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function PortfolioPreview({ coinId }) {
+  // Get current data
   const coinDataURL = `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
-  const marketDataURL = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=1&interval=hourly`;
   const {
     data: coinData,
     error: coinError,
     isLoading: coinIsLoading,
   } = useSWR(coinDataURL, fetcher);
-  const {
-    data: marketData,
-    error: marketError,
-    isLoading: marketIsLoading,
-  } = useSWR(marketDataURL, fetcher);
 
-  if (coinIsLoading || marketIsLoading) {
+  if (coinIsLoading) {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" />
       </View>
     );
   }
-  if (coinError || marketError) {
+  if (coinError) {
     return (
       <View style={styles.container}>
         <Text>Failed to load data...</Text>

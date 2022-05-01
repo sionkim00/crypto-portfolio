@@ -2,13 +2,16 @@ import "react-native-reanimated";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTabs from "./src/navigator/BottomTabs";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <NavigationContainer>
-        <BottomTabs />
-      </NavigationContainer>
+      <RecoilRoot>
+        <NavigationContainer>
+          <BottomTabs />
+        </NavigationContainer>
+      </RecoilRoot>
     </View>
   );
 }
