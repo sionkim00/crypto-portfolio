@@ -15,7 +15,6 @@ import {
 export default function AnalyticsScreen() {
   const individualBalances = useRecoilValue(getIndividualBalances);
   const thirtyDayBalances = useRecoilValue(getThirtyDayBalances);
-  console.log(thirtyDayBalances);
 
   return (
     <Suspense
@@ -32,7 +31,7 @@ export default function AnalyticsScreen() {
             height={300}
             theme={VictoryTheme.material}
             data={[
-              { x: "Bitcion", y: individualBalances.bitcoin || 1 },
+              { x: "Bitcoin", y: individualBalances.bitcoin || 1 },
               { x: "Ripple", y: individualBalances.ripple || 1 },
               { x: "Solana", y: individualBalances.solana || 1 },
             ]}

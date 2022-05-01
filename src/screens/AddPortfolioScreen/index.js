@@ -28,7 +28,7 @@ export default function AddPortfolioScreen() {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Add Portfolio!</Text>
+      <Text style={styles.title}>Add Portfolio</Text>
       <Text style={styles.subTitle}>1. Choose a coin to add</Text>
 
       <Picker
