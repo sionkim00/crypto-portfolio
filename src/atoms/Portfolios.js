@@ -6,6 +6,26 @@ export const portfolioValueState = atom({
   default: { bitcoin: 0, ripple: 0, solana: 0 },
 });
 
+export const getMarketDatas = selector({
+  key: "getMarketDatas",
+  get: async ({ get }) => {
+    const response1 = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily"
+    );
+    const response2 = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=30&interval=daily"
+    );
+    const response3 = await axios.get(
+      "https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=30&interval=daily"
+    );
+    return {
+      bitcoin: response1.data.prices,
+      ripple: response2.data.prices,
+      solana: response3.data.prices,
+    };
+  },
+});
+
 export const getCurrentPrices = selector({
   key: "getCurrentPrices",
   get: async ({ get }) => {
@@ -36,22 +56,40 @@ export const getTotalBalance = selector({
   },
 });
 
-export const getMarketDatas = selector({
-  key: "getMarketDatas",
-  get: async ({ get }) => {
-    const response1 = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily"
-    );
-    const response2 = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days=30&interval=daily"
-    );
-    const response3 = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=30&interval=daily"
-    );
+export const getThirtyDayBalances = selector({
+  key: "getThirtyDayBalances",
+  get: ({ get }) => {
+    const portfolioValue = get(portfolioValueState);
+    const marketDatas = get(getMarketDatas);
+    let balances = [];
+    for (let i = 1; i <= 30; i++) {
+      balances.push({
+        x: i,
+        y:
+          portfolioValue.bitcoin * marketDatas.bitcoin[i][1] +
+          portfolioValue.ripple * marketDatas.ripple[i][1] +
+          portfolioValue.solana * marketDatas.solana[i][1],
+      });
+    }
+    return balances;
+  },
+});
+
+export const getIndividualBalances = selector({
+  key: "getIndividualBalances",
+  get: ({ get }) => {
+    const portfolioValue = get(portfolioValueState);
+    const marketDatas = get(getMarketDatas);
     return {
-      bitcoin: response1.data.prices,
-      ripple: response2.data.prices,
-      solana: response3.data.prices,
+      bitcoin:
+        portfolioValue.bitcoin *
+          marketDatas.bitcoin[marketDatas.bitcoin.length - 1][1] || 0,
+      ripple:
+        portfolioValue.ripple *
+          marketDatas.ripple[marketDatas.ripple.length - 1][1] || 0,
+      solana:
+        portfolioValue.solana *
+          marketDatas.solana[marketDatas.solana.length - 1][1] || 0,
     };
   },
 });
