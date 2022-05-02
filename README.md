@@ -37,7 +37,7 @@ In *getHourlyTotalBalance*, Steps can be demonstrated as:
  2. Subscribe to portfolio value state
  3. Merge portfolio value and prices return an array that contains timeframe and hourly balance.
 <img src="https://render.githubusercontent.com/render/math?math=\sum_{n=1}^{24}[bitcionPrice_{n} * bitcoinHoldings + solanaPrice_{n} * solanaHoldings + ripplePrice_{n} * rippleHoldings]">
-_getDailyTotalBalance_ is done in a similar manner and sliced as needed.
+*getDailyTotalBalance* is done in a similar manner and sliced as needed.
 
  ## Further Improvements
 
