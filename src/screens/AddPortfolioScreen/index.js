@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   addContainer: {
-    marginTop: "auto",
+    marginTop: 10,
     marginHorizontal: 30,
     padding: 18,
     alignItems: "center",

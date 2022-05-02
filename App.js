@@ -1,5 +1,6 @@
 import "react-native-reanimated";
-import { StyleSheet, View } from "react-native";
+import React, { Suspense } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTabs from "./src/navigator/BottomTabs";
 import { RecoilRoot } from "recoil";
@@ -8,9 +9,17 @@ export default function App() {
   return (
     <View style={styles.container}>
       <RecoilRoot>
-        <NavigationContainer>
-          <BottomTabs />
-        </NavigationContainer>
+        <Suspense
+          fallback={
+            <View>
+              <Text>Loading...</Text>
+            </View>
+          }
+        >
+          <NavigationContainer>
+            <BottomTabs />
+          </NavigationContainer>
+        </Suspense>
       </RecoilRoot>
     </View>
   );

@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { Suspense } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import TotalBalance from "../../components/TotalBalance";
 import MyPortfolio from "../../components/MyPortfolio";
@@ -7,35 +7,27 @@ import MyPortfolio from "../../components/MyPortfolio";
 export default function HomeScreen() {
   const navigation = useNavigation();
   return (
-    <Suspense
-      fallback={
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      }
-    >
-      <View style={styles.container}>
-        <Image
-          source={require("../../../assets/elon.jpeg")}
-          style={styles.profileImage}
-        />
-        {/* Total balance */}
-        <View style={styles.totalContainer}>
-          <TotalBalance />
-        </View>
-        {/* My Portfolio */}
-        <View style={styles.myPortfolioContainer}>
-          <MyPortfolio />
-        </View>
-
-        <TouchableOpacity
-          style={styles.addContainer}
-          onPress={() => navigation.navigate("AddPortfolioScreen")}
-        >
-          <Text style={styles.add}>+</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <Image
+        source={require("../../../assets/elon.jpeg")}
+        style={styles.profileImage}
+      />
+      {/* Total balance */}
+      <View style={styles.totalContainer}>
+        <TotalBalance />
       </View>
-    </Suspense>
+      {/* My Portfolio */}
+      <View style={styles.myPortfolioContainer}>
+        <MyPortfolio />
+      </View>
+
+      <TouchableOpacity
+        style={styles.addContainer}
+        onPress={() => navigation.navigate("AddPortfolioScreen")}
+      >
+        <Text style={styles.add}>+</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
