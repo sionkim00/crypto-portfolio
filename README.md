@@ -1,4 +1,4 @@
-# Portfolio Display
+# Crypto Portfolio
 ## Live Preview (Expo)
 https://expo.dev/@sionkim00/portfolio-display
 ## Goal
